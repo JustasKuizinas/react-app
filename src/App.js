@@ -1,23 +1,25 @@
 import logo from './logo.svg';
+import React, { PureComponent } from 'react';
 import './App.css';
+import ClassComp from './ClassComp';
+import PureComp from './PureComp';
+import FunctionalComp from './FunctionalComp';
+import CreateEl from './CreateElem';
 
 function App() {
+
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Hello World
       </header>
+      {CreateEl}
+      <ClassComp/>
+      <PureComp/>
+      <FunctionalComp/>
+ 
+      
     </div>
   );
 }
