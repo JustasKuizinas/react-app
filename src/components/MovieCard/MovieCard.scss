@@ -1,0 +1,57 @@
+.movie-card {
+    color: #afafaf;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        .movie-options {
+            display: block;
+        }
+    }
+
+    img {
+        height: 400px;
+        background-color: #ccc;
+        display: block;
+        margin-bottom: 15px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    &__left {
+        margin-right: 5px;
+
+        p {
+            line-height: 1.2;
+        }
+        p:first-child {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        p:nth-child(2) {
+            font-size: 1.4rem;
+            color: #777;
+            font-weight: 600;
+        }
+    }
+    &__year {
+        font-size: 1.4rem;
+        padding: 5px 15px;
+        border: solid 1px #777777;
+        font-weight: 600;
+        border-radius: 5px;
+    }
+    &__desc {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-items: top;
+    }
+
+    .movie-options {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: none;
+    }
+}

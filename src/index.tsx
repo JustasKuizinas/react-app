@@ -2,6 +2,10 @@ import './style.scss';
 
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './components/App/App';
+import App from './containers/App/App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+    <React.StrictMode>
+        <App/>
+    </React.StrictMode>
+    , document.getElementById('app-wrapper'));

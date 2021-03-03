@@ -20,6 +20,13 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(png|jpg|gif)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {}
+                }]
+            },
+            {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,

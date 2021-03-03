@@ -1,0 +1,60 @@
+.container {
+    margin: 0 auto;
+    width: 1000px;
+    max-width: 100%;
+}
+
+.logo {
+    color: var(--color-primary);
+    font-size: 2rem;
+    span {
+        font-weight: 700;
+    }
+}
+
+.btn {
+    &.-primary {
+        height: 60px;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: var(--color-primary);
+        border-radius: 5px;
+        font-size: 2rem;
+        padding: 0 20px;
+    }
+
+    &.-secondary {
+        background-color: rgba(83, 83, 83, 0.8);
+        text-transform: uppercase;
+        color: var(--color-primary);
+        border-radius: 5px;
+        height: 40px;
+        padding: 0 20px;
+        font-size: 1.8rem;
+    }
+}
+
+.inpt{
+    &.-secondary{
+        height: 60px;
+        color:#fff;
+        padding: 0 20px;
+        border-radius: 5px;
+        background-color: rgba(28,28,28, 0.8);
+        font-size: 2rem;
+
+        &::placeholder{
+            color: #6d6d6d;
+        }
+    }
+}
+
+.main-logo{
+    position: absolute;
+    top: 20px;
+    left: 0;
+    cursor: pointer;
+    z-index: 10;
+    width: 100%;
+    pointer-events: none;
+}
