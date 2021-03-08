@@ -1,0 +1,35 @@
+.inpt {
+  input {
+    width: 100%;
+  }
+
+  &.-primary {
+    input {
+      height: 50px;
+      font-size: 1.7rem;
+      color: #fff;
+      background-color: #323232;
+      border-radius: 3px;
+      padding: 0 20px;
+
+      &::placeholder {
+        color: #6d6d6d;
+      }
+    }
+  }
+  &.-secondary {
+    input {
+      height: 60px;
+      color: #fff;
+      padding: 0 20px;
+      border-radius: 5px;
+      background-color: rgba(28, 28, 28, 0.8);
+      font-size: 2rem;
+      width: 100%;
+
+      &::placeholder {
+        color: #6d6d6d;
+      }
+    }
+  }
+}

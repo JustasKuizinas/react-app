@@ -46,7 +46,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            position: relative;
+            position: relative; 
         }
 
         .icon-search {
@@ -81,6 +81,7 @@
                 border: solid 1px #c6c6c6;
                 border-radius: 100%;
                 color: yellowgreen;
+                flex: 0 0 60px;
             }
         }
         &__sub {

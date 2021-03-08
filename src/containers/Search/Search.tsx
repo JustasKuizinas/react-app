@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import './Search.scss';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import "./Search.scss";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 class Search extends Component<any, any> {
   public static propTypes = {};
@@ -8,8 +10,8 @@ class Search extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
-      search: ''
-    }
+      search: "",
+    };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.doSearch = this.doSearch.bind(this);
@@ -25,24 +27,26 @@ class Search extends Component<any, any> {
   }
 
   handleKeyDown(e) {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this.doSearch();
     }
   }
 
-
   render() {
     return (
       <div className="search">
-        <input className="inpt -secondary"
+        <Input
+          style="-secondary"
           type="text"
           placeholder="What do you want to watch?"
           onChange={this.onInputChange}
           onKeyDown={this.handleKeyDown}
         />
-        <button className="btn -primary" onClick={this.doSearch}>search</button>
+        <Button style="-primary" onClick={this.doSearch}>
+          search
+        </Button>
       </div>
-    )
+    );
   }
 }
 

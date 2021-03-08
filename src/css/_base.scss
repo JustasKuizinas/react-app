@@ -1,33 +1,34 @@
 :root {
-    --color-primary: #f65261;
-    --font-primary: "Open Sans", sans-serif;
+  --color-primary: #f65261;
+  --font-primary: "Open Sans", sans-serif;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
-input{
-    border:none;
+input {
+  border: none;
 }
 
 body {
-    font-family: var(--font-primary);
-    background-color: #232323;
-    color: #fff;
-    font-size: 1.6rem;
+  font-family: var(--font-primary);
+  background-color: #232323;
+  color: #fff;
+  font-size: 1.6rem;
 }
 button {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
