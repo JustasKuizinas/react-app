@@ -1,47 +1,33 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "./MoviesList.scss";
-import MoviesFilter from "../../components/MoviesFilter/MoviesFilter";
-import MovieCard from "../../components/MovieCard/MovieCard";
+import React, { Component, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import './MoviesList.scss';
+import MoviesFilter from '../../components/MoviesFilter/MoviesFilter';
+import MovieCard from '../../components/MovieCard/MovieCard';
 
-class MoviesList extends Component<any, any> {
-  moviesJSON = [];
-  public static propTypes = {
-    filterMovies: PropTypes.func,
-    setActiveMovie: PropTypes.func,
-    movies: PropTypes.array,
-    moviesReceived: PropTypes.bool,
-  };
+const MoviesList: React.FC<any> = props => {
+  const [moviesFound, setMoviesFound] = useState(null);
 
-  constructor(props) {
-    super(props);
-
-    this.state = { moviesFound: null };
-  }
-
-  componentDidUpdate() {}
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.moviesReceived) {
-      if (nextProps.movies.length > 0) {
-        return { moviesFound: true };
+  useEffect(() => {
+    if (props.moviesReceived) {
+      if (props.movies.length > 0) {
+        setMoviesFound(true);
+      } else {
+        setMoviesFound(false);
       }
-      return { moviesFound: false };
     }
-    return { moviesFound: null };
-  }
+  }, [props.moviesReceived, props.movies]);
 
-  renderMovieList() {
+  function renderMovieList() {
     return (
       <div>
         <div className="movies-list__found">
-          <span>{this.props.movies.length}</span> movies found
+          <span>{props.movies.length}</span> movies found
         </div>
         <div className="movies-list__grid">
-          {this.props.movies.map((movie) => (
+          {props.movies.map(movie => (
             <MovieCard
-              openModal={this.props.openModal}
-              setActiveMovie={this.props.setActiveMovie}
+              openModal={props.openModal}
+              setActiveMovie={props.setActiveMovie}
               movie={movie}
               key={movie.id}
             />
@@ -51,28 +37,33 @@ class MoviesList extends Component<any, any> {
     );
   }
 
-  renderNotFound() {
+  function renderNotFound() {
     return <div className="movies-list__notfound">No Movie Found</div>;
   }
 
-  render() {
-    return (
-      <div className="movies-list">
-        <div className="container">
-          <MoviesFilter
-            genre={this.props.genre}
-            sortBy={this.props.sortBy}
-            filterMovies={this.props.filterMovies}
-          />
-          {this.state.moviesFound != null
-            ? this.state.moviesFound
-              ? this.renderMovieList()
-              : this.renderNotFound()
-            : ""}
-        </div>
+  return (
+    <div className="movies-list">
+      <div className="container">
+        <MoviesFilter
+          genre={props.genre}
+          sortBy={props.sortBy}
+          filterMovies={props.filterMovies}
+        />
+        {moviesFound != null
+          ? moviesFound
+            ? renderMovieList()
+            : renderNotFound()
+          : ''}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+MoviesList.propTypes = {
+  filterMovies: PropTypes.func,
+  setActiveMovie: PropTypes.func,
+  movies: PropTypes.array,
+  moviesReceived: PropTypes.bool,
+};
 
 export default MoviesList;

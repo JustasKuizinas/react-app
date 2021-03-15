@@ -1,6 +1,6 @@
 :root {
   --color-primary: #f65261;
-  --font-primary: "Open Sans", sans-serif;
+  --font-primary: 'Open Sans', sans-serif;
 }
 
 * {
@@ -9,6 +9,7 @@
 
 html {
   font-size: 62.5%;
+  height: 100%;
 }
 
 input {
@@ -20,6 +21,11 @@ body {
   background-color: #232323;
   color: #fff;
   font-size: 1.6rem;
+  height: 100%;
+
+  &.modal-open {
+    overflow: hidden;
+  }
 }
 button {
   background: none;

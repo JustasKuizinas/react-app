@@ -1,80 +1,69 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "./Header.scss";
-import Search from "../Search/Search";
-import { VscSearch } from "react-icons/vsc";
-import Button from "../../components/Button/Button";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './Header.scss';
+import { VscSearch } from 'react-icons/vsc';
+import Button from '../../components/Button/Button';
+import Search from '../../components/Search/Search';
+import { MODAL } from '../../types';
 
-class Header extends Component<any, any> {
-  public static propTypes = {};
 
-  constructor(props) {
-    super(props);
 
-    this.closeMovieInfo = this.closeMovieInfo.bind(this);
-    this.addMovie = this.addMovie.bind(this);
+const Header: React.FC<any> = props => {
+  function closeMovieInfo() {
+    props.setActiveMovie(null);
   }
 
-  closeMovieInfo() {
-    this.props.setActiveMovie(null);
+  function addMovie() {
+    props.openModal(MODAL.MOVIE_ADD);
   }
-
-  addMovie() {  
-    this.props.openModal("movieForm",{title:'Add movie'});
-  }
-
-  renderSearch() {
+  function renderSearch() {
     return (
       <div className="header__search">
         <div className="container">
           <div className="header__add">
-            <Button onClick={this.addMovie} style="-secondary">
+            <Button onClick={addMovie} style="-secondary">
               + ADD MOVIE
             </Button>
           </div>
 
           <h1>Find your movie</h1>
-          <Search filterMovies={this.props.filterMovies} />
+          <Search filterMovies={props.filterMovies} />
         </div>
       </div>
     );
   }
 
-  renderMovieDetails() {
+  function renderMovieDetails() {
     return (
       <div className="movie-info">
         <div className="container">
-          <VscSearch onClick={this.closeMovieInfo} className="icon-search" />
-          <img src={this.props.movie?.poster_path} alt="" />
+          <VscSearch onClick={closeMovieInfo} className="icon-search" />
+          <img src={props.activeMovie?.poster_path} alt="" />
           <div className="movie-info__desc">
             <div className="movie-info__title">
-              {this.props.movie?.title}
-              <span>{this.props.movie?.vote_average}</span>
+              {props.activeMovie?.title}
+              <span>{props.activeMovie?.vote_average}</span>
             </div>
-            <div className="movie-info__sub">{this.props.movie?.tagline}</div>
+            <div className="movie-info__sub">{props.activeMovie?.tagline}</div>
             <div className="movie-info__yt">
-              {this.props.movie?.release_date.slice(0, 4)}
-              {this.props.movie?.runtime && (
-                <span>{this.props.movie?.runtime} min</span>
-              )}
+              {props.activeMovie?.release_date.slice(0, 4)}
+              {props.activeMovie?.runtime && <span>{props.activeMovie?.runtime} min</span>}
             </div>
-            <p>{this.props.movie?.overview}</p>
+            <p>{props.activeMovie?.overview}</p>
           </div>
         </div>
       </div>
     );
   }
 
-  render() {
-    return (
-      <div className="header">
-        <div className="header__bg"></div>
-        {!this.props.movie && this.renderSearch()}
-        {this.props.movie && this.renderMovieDetails()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="header">
+      <div className="header__bg"></div>
+      {!props.activeMovie && renderSearch()}
+      {props.activeMovie && renderMovieDetails()}
+    </div>
+  );
+};
 
 Header.propTypes = {
   movie: PropTypes.object,

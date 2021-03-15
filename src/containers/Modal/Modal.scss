@@ -12,10 +12,8 @@
   color: #fff;
 
   &__body {
-    flex: 1 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex: 0 1 auto;
+    overflow-y: scroll;
   }
   &__close {
     position: absolute;
@@ -39,17 +37,22 @@
     width: 700px;
     max-width: 100%;
     background-color: #232323;
-    margin: 90px 20px 50px;
+    margin: 90px auto 50px;
     padding: 70px 80px;
   }
   &__text {
     font-size: 1.8rem;
   }
   &__btns {
+    margin-top: 70px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 50px;
+
+    .btn {
+      margin-left: 20px;
+      width: 150px;
+    }
   }
 
   .footer {

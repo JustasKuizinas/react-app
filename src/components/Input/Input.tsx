@@ -1,15 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./Input.scss";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import './Input.scss';
 
-const Input = (props) => {
+const Input: React.FC<any> = props => {
+  let [value, setValue] = useState('');
+
+  useEffect(() => {
+    setValue(props.value);
+  }, []);
+
+  function onChange(e) {
+    setValue(e.target.value);
+    props.onChange(e);
+  }
   return (
-    <div className={"inpt " + props.style}>
+    <div className={'inpt ' + props.style}>
       <input
-        value={props.value}
+        value={value}
         type={props.type}
         placeholder={props.placeholder}
-        onChange={props.onChange}
+        onChange={onChange}
         onKeyDown={props.onKeyDown}
       />
     </div>
@@ -17,10 +27,10 @@ const Input = (props) => {
 };
 
 Input.defaultProps = {
-  value: "",
-  style: "",
-  type: "text",
-  placeholder: "",
+  value: '',
+  style: '',
+  type: 'text',
+  placeholder: '',
   onChange: () => {},
   onKeyDown: () => {},
 };

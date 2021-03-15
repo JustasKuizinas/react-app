@@ -1,15 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./Select.scss";
-import { IoMdArrowDropdown } from "react-icons/io";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Select.scss';
+import { IoMdArrowDropdown } from 'react-icons/io';
 
-const Select = (props) => {
+const Select = props => {
   return (
     <div className="select">
       <select onChange={props.onChange}>
-        {props.options.map((option) => (
+        {props.options.map(option => (
           <option value={option.value} key={option.value}>
-            {option.text}
+            {option.label}
           </option>
         ))}
       </select>
@@ -21,7 +21,7 @@ const Select = (props) => {
 Select.propTypes = {};
 
 Select.defaultProps = {
-  onChange: (e) => {},
+  onChange: e => {},
   options: [],
 };
 

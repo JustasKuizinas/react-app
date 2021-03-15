@@ -1,15 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./MovieCard.scss";
-import MovieOptions from "../MovieOptions/MovieOptions";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './MovieCard.scss';
+import MovieOptions from '../MovieOptions/MovieOptions';
+import { MODAL } from '../../types';
 
-const MovieCard = (props) => {
-  let genres = "";
+const MovieCard: React.FC<any> = props => {
+  let genres = '';
   let genresArr = props.movie.genres;
   if (genresArr.length == 2) {
-    genres = genresArr.join(" & ");
+    genres = genresArr.join(' & ');
   } else if (genresArr.length > 2) {
-    genres = genresArr.join(", ");
+    genres = genresArr.join(', ');
   }
 
   function setActiveMovie() {
@@ -17,15 +18,22 @@ const MovieCard = (props) => {
   }
 
   function editMovie() {
-    props.openModal("movieForm", { movie: props.movie });
+    props.openModal(MODAL.MOVIE_EDIT, {
+      movie: props.movie,
+    });
   }
 
   function deleteMovie() {
-    props.openModal("confirm", {
-      title: "delete movie",
-      confirmText: "Are you sure you want to delete this movie?",
-      confirmFn: () => {},
+    props.openModal(MODAL.CONFIRM, {
+      title: 'delete movie',
+      submitContent: 'Are you sure you want to delete this movie?',
+      onModalSubmit: () => {},
     });
+  }
+
+  function onImgError(e) {
+    e.target.src =
+      'https://lh3.googleusercontent.com/proxy/KVnTKIQGqeBWUkoBm1iqqDxfcKuPRIckyGYu2o2r_RyWFAxjZYCPL7kMsHkMFEjNb8QxpALUs-bq31CRsndHiOyWD6FXo64TRHNY9LLSN0mJ1ux9uyG2h3aIrq0';
   }
 
   return (

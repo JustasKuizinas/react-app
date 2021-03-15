@@ -1,8 +1,13 @@
 .inpt {
   input {
     width: 100%;
-  }
 
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      color:var(--color-primary);
+    }
+  }
+ 
   &.-primary {
     input {
       height: 50px;
