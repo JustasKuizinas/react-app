@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import './MoviesList.scss';
 import MoviesFilter from '../../components/MoviesFilter/MoviesFilter';
 import MovieCard from '../../components/MovieCard/MovieCard';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
 
 const MoviesList: React.FC<any> = props => {
   const [moviesFound, setMoviesFound] = useState(null);
+  let movies = useSelector((state: RootState) => state.movies);
 
   useEffect(() => {
+    console.log(movies);
+
     if (props.moviesReceived) {
       if (props.movies.length > 0) {
         setMoviesFound(true);
