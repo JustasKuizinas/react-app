@@ -5,8 +5,8 @@ import { VscSearch } from 'react-icons/vsc';
 import Button from '../../components/Button/Button';
 import Search from '../../components/Search/Search';
 import { MODAL } from '../../types';
-
-
+import { connect } from 'react-redux';
+import { movieFilter } from '../../redux/movie/movie.actions';
 
 const Header: React.FC<any> = props => {
   function closeMovieInfo() {
@@ -27,7 +27,7 @@ const Header: React.FC<any> = props => {
           </div>
 
           <h1>Find your movie</h1>
-          <Search filterMovies={props.filterMovies} />
+          <Search onSearch={props.movieFilterProp} />
         </div>
       </div>
     );
@@ -47,7 +47,9 @@ const Header: React.FC<any> = props => {
             <div className="movie-info__sub">{props.activeMovie?.tagline}</div>
             <div className="movie-info__yt">
               {props.activeMovie?.release_date.slice(0, 4)}
-              {props.activeMovie?.runtime && <span>{props.activeMovie?.runtime} min</span>}
+              {props.activeMovie?.runtime && (
+                <span>{props.activeMovie?.runtime} min</span>
+              )}
             </div>
             <p>{props.activeMovie?.overview}</p>
           </div>
@@ -67,7 +69,12 @@ const Header: React.FC<any> = props => {
 
 Header.propTypes = {
   movie: PropTypes.object,
-  filterMovies: PropTypes.func,
 };
 
-export default Header;
+function mapDispatchProps(dispatch) {
+  return {
+    movieFilterProp: search => dispatch(movieFilter('', search)),
+  };
+}
+
+export default connect(null, mapDispatchProps)(Header);

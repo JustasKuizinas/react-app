@@ -12,8 +12,8 @@
   color: #fff;
 
   &__body {
-    flex: 0 1 auto;
-    overflow-y: scroll;
+    flex: 1 1 auto;
+    overflow-y: auto;
   }
   &__close {
     position: absolute;

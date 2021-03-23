@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import './Input.scss';
 
 const Input: React.FC<any> = props => {
-  let [value, setValue] = useState('');
-
-  useEffect(() => {
-    setValue(props.value);
-  }, []);
+  let [value, setValue] = useState(props.value);
 
   function onChange(e) {
     setValue(e.target.value);
-    props.onChange(e);
+    props.onChange(e.target.value);
   }
   return (
     <div className={'inpt ' + props.style}>

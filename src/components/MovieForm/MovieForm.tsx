@@ -29,11 +29,17 @@ const MovieForm: React.FC<any> = props => {
         .map(genre => ({
           label: genre,
           value: genre,
-        }));
+        })); 
+        console.log(props.movie, movieGenres)
       setGenres(movieGenres);
     }
   }, []);
 
+  function multiSelectChange(genres) {
+    let genresArr = genres.map(genre => genre.value);
+    props.onInputValueChange('genres', genresArr);
+    setGenres(genres);
+  }
 
   return (
     <div className="movie-form">
@@ -44,6 +50,7 @@ const MovieForm: React.FC<any> = props => {
             value={props.movie?.title}
             style="-primary"
             placeholder="Title here"
+            onChange={props.onInputValueChange.bind(null, 'title')}
           ></Input>
         </div>
         <div className="movie-form__field">
@@ -53,6 +60,7 @@ const MovieForm: React.FC<any> = props => {
             style="-primary"
             type="date"
             placeholder="Select date"
+            onChange={props.onInputValueChange.bind(null, 'release_date')}
           ></Input>
         </div>
         <div className="movie-form__field">
@@ -61,6 +69,7 @@ const MovieForm: React.FC<any> = props => {
             value={props.movie?.poster_path}
             style="-primary"
             placeholder="Poster URL here"
+            onChange={props.onInputValueChange.bind(null, 'poster_path')}
           ></Input>
         </div>
         <div className="movie-form__field">
@@ -70,7 +79,7 @@ const MovieForm: React.FC<any> = props => {
             disableSearch={true}
             options={movieOptions}
             value={selectedGenres}
-            onChange={setGenres}
+            onChange={multiSelectChange}
             labelledBy={'Select'}
           />
         </div>
@@ -80,6 +89,7 @@ const MovieForm: React.FC<any> = props => {
             value={props.movie?.overview}
             style="-primary"
             placeholder="Overview here"
+            onChange={props.onInputValueChange.bind(null, 'overview')}
           ></Input>
         </div>
         <div className="movie-form__field">
@@ -88,6 +98,7 @@ const MovieForm: React.FC<any> = props => {
             value={props.movie?.runtime ? props.movie.runtime : ''}
             style="-primary"
             placeholder="Runtime here"
+            onChange={props.onInputValueChange.bind(null, 'runtime')}
           ></Input>
         </div>
       </form>
@@ -96,5 +107,8 @@ const MovieForm: React.FC<any> = props => {
 };
 
 MovieForm.propTypes = {};
+MovieForm.defaultProps = {
+  onInputValueChange:function(){}
+};
 
 export default MovieForm;

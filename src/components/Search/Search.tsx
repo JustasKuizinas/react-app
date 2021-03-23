@@ -4,15 +4,16 @@ import './Search.scss';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 
-const Search = props => {
+const Search: React.FC<any> = props => {
   const [searchValue, setSearchValue] = useState('');
 
-  function onChange(e) {
-    setSearchValue(e.target.value);
+  function onChange(value) {
+    setSearchValue(value);
   }
 
   function doSearch() {
-    props.filterMovies(null, null, searchValue);
+    console.log(searchValue)
+    props.onSearch(searchValue);
   }
 
   function handleKeyDown(e) {
@@ -38,8 +39,6 @@ const Search = props => {
   );
 };
 
-Search.propTypes = {
-  filterMovies: PropTypes.func,
-};
+Search.propTypes = {};
 
 export default Search;
