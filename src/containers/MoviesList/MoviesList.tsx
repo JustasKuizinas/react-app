@@ -66,4 +66,6 @@ MoviesList.propTypes = {
   moviesReceived: PropTypes.bool,
 };
 
+MoviesList.whyDidYouRender = true
+  
 export default MoviesList;

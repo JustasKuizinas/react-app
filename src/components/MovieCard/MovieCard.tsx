@@ -59,4 +59,6 @@ MovieCard.propTypes = {
   movie: PropTypes.object,
 };
 
+MovieCard.whyDidYouRender = true
+
 export default MovieCard;
