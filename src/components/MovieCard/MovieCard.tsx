@@ -7,7 +7,9 @@ import { MODAL } from '../../types';
 const MovieCard: React.FC<any> = props => {
   let genres = '';
   let genresArr = props.movie.genres;
-  if (genresArr.length == 2) {
+  if (genresArr.length == 1) {
+    genres = props.movie.genres[0];
+  } else if (genresArr.length == 2) {
     genres = genresArr.join(' & ');
   } else if (genresArr.length > 2) {
     genres = genresArr.join(', ');
@@ -24,10 +26,10 @@ const MovieCard: React.FC<any> = props => {
   }
 
   function deleteMovie() {
-    props.openModal(MODAL.CONFIRM, {
+    props.openModal(MODAL.MOVIE_DELETE, {
       title: 'delete movie',
       submitContent: 'Are you sure you want to delete this movie?',
-      onModalSubmit: () => {},
+      id: props.movie.id,
     });
   }
 

@@ -1,13 +1,36 @@
 .inpt {
+  position: relative;
+
+  &__calendar {
+    display: none;
+    font-size: 25px;
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    color: var(--color-primary);
+  }
+
   input {
     width: 100%;
-
-    &::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      color:var(--color-primary);
+    position: relative;
+    &[type='date'] + .inpt__calendar {
+      display: block;
     }
   }
- 
+
+  input::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+  }
+
   &.-primary {
     input {
       height: 50px;

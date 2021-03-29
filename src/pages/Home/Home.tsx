@@ -16,15 +16,10 @@ const Home: React.FC<any> = props => {
           openModal={props.openModal}
           setActiveMovie={props.selectActiveMovie}
           activeMovie={props.activeMovie}
-          filterMovies={props.filterMovies}
+        
         />
         <MoviesList
           openModal={props.openModal}
-          sortBy={props.sortBy}
-          genre={props.genre}
-          moviesReceived={props.moviesReceived}
-          filterMovies={props.filterMovies}
-          movies={props.movies}
           setActiveMovie={props.selectActiveMovie}
         />
       </ErrorBoundary>

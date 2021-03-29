@@ -3,35 +3,41 @@ import PropTypes from 'prop-types';
 import './MoviesList.scss';
 import MoviesFilter from '../../components/MoviesFilter/MoviesFilter';
 import MovieCard from '../../components/MovieCard/MovieCard';
+import { connect, useSelector } from 'react-redux';
+import { RootState } from '../../redux';
+import { API_URL } from '../../types';
+import { movieAdd, movieInit } from '../../redux/movie/movie.actions';
+import MovieService from '../../services/movie/movie.service';
 
 const MoviesList: React.FC<any> = props => {
-  const [moviesFound, setMoviesFound] = useState(null);
+  const [moviesFound, setMoviesFound] = useState(true);
 
   useEffect(() => {
-    if (props.moviesReceived) {
-      if (props.movies.length > 0) {
-        setMoviesFound(true);
-      } else {
-        setMoviesFound(false);
-      }
-    }
-  }, [props.moviesReceived, props.movies]);
+    MovieService.getAll(1000).then(movies => {
+      props.movieInitProp(movies);
+    });
+  }, []);
 
   function renderMovieList() {
     return (
       <div>
         <div className="movies-list__found">
-          <span>{props.movies.length}</span> movies found
+          <span>{props.moviesPprop.filter(movie => movie.active).length}</span>{' '}
+          movies found
         </div>
         <div className="movies-list__grid">
-          {props.movies.map(movie => (
-            <MovieCard
-              openModal={props.openModal}
-              setActiveMovie={props.setActiveMovie}
-              movie={movie}
-              key={movie.id}
-            />
-          ))}
+          {props.moviesPprop.map(movie => {
+            if (movie.active) {
+              return (
+                <MovieCard
+                  openModal={props.openModal}
+                  setActiveMovie={props.setActiveMovie}
+                  movie={movie}
+                  key={movie.id}
+                />
+              );
+            }
+          })}
         </div>
       </div>
     );
@@ -44,11 +50,7 @@ const MoviesList: React.FC<any> = props => {
   return (
     <div className="movies-list">
       <div className="container">
-        <MoviesFilter
-          genre={props.genre}
-          sortBy={props.sortBy}
-          filterMovies={props.filterMovies}
-        />
+        <MoviesFilter />
         {moviesFound != null
           ? moviesFound
             ? renderMovieList()
@@ -60,12 +62,23 @@ const MoviesList: React.FC<any> = props => {
 };
 
 MoviesList.propTypes = {
-  filterMovies: PropTypes.func,
   setActiveMovie: PropTypes.func,
   movies: PropTypes.array,
   moviesReceived: PropTypes.bool,
 };
 
-MoviesList.whyDidYouRender = true
-  
-export default MoviesList;
+MoviesList.whyDidYouRender = true;
+
+function mapStateProps(state) {
+  return {
+    moviesPprop: state.movies,
+  };
+}
+
+function mapDispatchProps(dispatch) {
+  return {
+    movieInitProp: movies => dispatch(movieInit(movies)),
+  };
+}
+
+export default connect(mapStateProps, mapDispatchProps)(MoviesList);

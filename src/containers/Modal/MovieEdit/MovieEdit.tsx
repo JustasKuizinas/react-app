@@ -3,8 +3,21 @@ import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import MovieForm from '../../../components/MovieForm/MovieForm';
 import './MovieEdit.scss';
+import { connect } from 'react-redux';
+import { movieEdit } from '../../../redux/movie/movie.actions';
 
 const MovieEditModal: React.FC<any> = props => {
+  let movie = props.movie;
+
+  function editMovie() {
+    props.movieEditProp(movie);
+    props.onModalClose();
+  }
+
+  function inputValueChange(property, value) {
+    movie[property] = value;
+  }
+
   return (
     <Modal
       title="edit movie"
@@ -12,11 +25,16 @@ const MovieEditModal: React.FC<any> = props => {
       cancelText="Reset"
       onModalClose={props.onModalClose}
       onModalCancel={() => {}}
-      onModalSubmit={() => {}}
+      onModalSubmit={editMovie}
     >
-      <MovieForm movie={props.movie}></MovieForm>
+      <MovieForm   onInputValueChange={inputValueChange} movie={props.movie}></MovieForm>
     </Modal>
   );
 };
 
-export default MovieEditModal;
+function mapDispatchProps(dispatch) {
+  return {
+    movieEditProp: movie => dispatch(movieEdit(movie)),
+  };
+}
+export default connect(null, mapDispatchProps)(MovieEditModal);

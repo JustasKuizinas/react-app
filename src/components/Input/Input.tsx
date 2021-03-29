@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Input.scss';
+import { BiCalendar } from 'react-icons/bi';
 
 const Input: React.FC<any> = props => {
-  let [value, setValue] = useState('');
-
-  useEffect(() => {
-    setValue(props.value);
-  }, []);
+  let [value, setValue] = useState(props.value);
 
   function onChange(e) {
     setValue(e.target.value);
-    props.onChange(e);
+    props.onChange(e.target.value);
   }
   return (
     <div className={'inpt ' + props.style}>
@@ -22,6 +19,7 @@ const Input: React.FC<any> = props => {
         onChange={onChange}
         onKeyDown={props.onKeyDown}
       />
+      <BiCalendar className="inpt__calendar"></BiCalendar>
     </div>
   );
 };
