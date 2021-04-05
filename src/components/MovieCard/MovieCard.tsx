@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './MovieCard.scss';
 import MovieOptions from '../MovieOptions/MovieOptions';
 import { MODAL } from '../../types';
+import { __dc } from '../../helpers';
 
 const MovieCard: React.FC<any> = props => {
   let genres = '';
@@ -21,7 +22,7 @@ const MovieCard: React.FC<any> = props => {
 
   function editMovie() {
     props.openModal(MODAL.MOVIE_EDIT, {
-      movie: props.movie,
+        movie: __dc(props.movie),
     });
   }
 

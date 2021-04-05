@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import MovieForm from '../../../components/MovieForm/MovieForm';
@@ -7,36 +7,36 @@ import { connect } from 'react-redux';
 import { movieAdd } from '../../../redux/movie/movie.actions';
 
 const MovieAddModal: React.FC<any> = props => {
-  let movie = {
-    overview: '',
-    poster_path: '',
-    release_date: '',
-    runtime: '',
-    title: '',
-    genres: [],
-  };
+  const formRef:any = useRef();
 
   function addMovie() {
-    props.movieAddProp(movie);
-    props.onModalClose();
+    if (formRef.current) {
+     formRef.current.handleSubmit();
+    }
+    if(formRef.current && formRef.current.isValid){
+      let movie = formRef.current.values;
+      props.movieAddProp(movie);
+      props.onModalClose();
+    }
+   
   }
 
-  function inputValueChange(property, value) {
-    movie[property] = value;
+  function resetForm(){
+    formRef.current.handleReset();
   }
-
+  
   function onModalCancel() {}
 
-  return (
+  return ( 
     <Modal
       title="Add Movie"
       submitText="Submit"
       cancelText="Reset"
       onModalClose={props.onModalClose}
-      onModalCancel={onModalCancel}
-      onModalSubmit={addMovie}
+      onModalCancel={resetForm}
+      onModalSubmit={addMovie} 
     >
-      <MovieForm onInputValueChange={inputValueChange}></MovieForm>
+      <MovieForm  formRef={formRef}></MovieForm>
     </Modal>
   );
 };

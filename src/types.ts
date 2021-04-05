@@ -9,6 +9,20 @@ export const MOVIE_GENRES = {
   FANTASY: 'Fantasy'
 } as const;
 
+export const MOVIE_GENRES_FULL = {
+  ...MOVIE_GENRES, 
+  SCIENCE_FICTION: 'Science Fiction',
+  ANIMATION: 'Animation',
+  FAMILY: 'Family',
+  DRAMA: 'Drama',
+  ROMANCE:'Romance',
+  MYSTERY: 'Mystery',
+  THRILLER:'Thriller',
+  WAR: 'War',
+  HISTORY: 'History',
+  MUSIC: 'Music'
+} as const;
+
 export const SORT_BY = {
   DATE: 'Release Date',
   TITLE: 'Title',

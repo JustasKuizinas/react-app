@@ -8,12 +8,16 @@
       margin-bottom: 15px;
       font-weight: 700;
     }
+
+    &.has-error .dropdown-heading{
+      border:solid 1px var(--color-primary);
+    }
   }
   &__field + &__field {
     margin-top: 30px;
   }
   &__btns {
-    margin-top: 50px;
+      margin-top: 50px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -22,6 +26,13 @@
       margin-left: 20px;
       width: 150px;
     }
+  }
+
+  &__error {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    height: 12px;
+    margin-top: 5px;
   }
 
   .multi-select {
@@ -35,6 +46,8 @@
       background-color: #323232;
       border-radius: 3px;
       padding: 0 20px;
+
+     
 
       svg {
         color: var(--color-primary);

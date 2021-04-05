@@ -13,6 +13,7 @@ const Input: React.FC<any> = props => {
   return (
     <div className={'inpt ' + props.style}>
       <input
+        name={props.name}
         value={value}
         type={props.type}
         placeholder={props.placeholder}
