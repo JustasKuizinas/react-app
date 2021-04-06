@@ -23,36 +23,29 @@ const MovieForm: React.FC<any> = props => {
   }));
 
   const ValidationSchema = Yup.object().shape({
-    title: Yup.string()
-      .required('Required'),
-    tagline: Yup.string()
-      .required('Required'),
-    release_date: Yup.string()
-      .required('Required'),
+    title: Yup.string().required('Required'),
+    tagline: Yup.string().required('Required'),
+    release_date: Yup.string().required('Required'),
     poster_path: Yup.string()
       .url('Poster path must be a valid URL')
       .required('Required'),
     genres: Yup.array()
-      .min(1,'Select at least 1 item')
+      .min(1, 'Select at least 1 item')
       .required('Select at least 1 item'),
-    overview: Yup.string()
-      .required('Required'),
-    runtime: Yup.number()
-      .required('Required'),
+    overview: Yup.string().required('Required'),
+    runtime: Yup.number().required('Required'),
   });
-  
-  let initialValues = {
-      id: props.movie?.id?props.movie.id:'',
-      title: props.movie?.title?props.movie.title:'',
-      tagline: props.movie?.tagline?props.movie.tagline:'',
-      release_date: props.movie?.release_date?props.movie.release_date:'',
-      poster_path: props.movie?.poster_path?props.movie.poster_path:'',
-      overview: props.movie?.overview?props.movie.overview:'',
-      runtime: props.movie?.runtime?props.movie.runtime:'',
-      genres: props.movie?.genres?props.movie.genres:[],
-  }
 
- 
+  let initialValues = {
+    id: props.movie?.id ? props.movie.id : '',
+    title: props.movie?.title ? props.movie.title : '',
+    tagline: props.movie?.tagline ? props.movie.tagline : '',
+    release_date: props.movie?.release_date ? props.movie.release_date : '',
+    poster_path: props.movie?.poster_path ? props.movie.poster_path : '',
+    overview: props.movie?.overview ? props.movie.overview : '',
+    runtime: props.movie?.runtime ? props.movie.runtime : '',
+    genres: props.movie?.genres ? props.movie.genres : [],
+  };
 
   useEffect(() => {
     let movie = props.movie;
@@ -65,67 +58,86 @@ const MovieForm: React.FC<any> = props => {
         .map(genre => ({
           label: genre,
           value: genre,
-        })); 
+        }));
       setGenres(movieGenres);
 
-      console.log(movie)
-     
+      console.log(movie);
     }
-
   }, []);
 
   function multiSelectChange(form, field, genres) {
     let genresArr = genres.map(genre => genre.value);
-    form.setFieldValue('genres',genresArr);
-    form.setFieldTouched('genres',true);
+    form.setFieldValue('genres', genresArr);
+    form.setFieldTouched('genres', true);
     setGenres(genres);
   }
 
-  function onSubmit(){
+  function onSubmit() {}
 
-  }
-
-  function onReset(){
+  function onReset() {
     setGenres([]);
   }
 
-
   return (
     <div className="movie-form">
-        <Formik
-          enableReinitialize={true} 
-          innerRef={props.formRef}
-          initialValues={initialValues}
-          validationSchema={ValidationSchema}
-          onSubmit={onSubmit}
-          onReset={onReset}
+      <Formik
+        enableReinitialize={true}
+        innerRef={props.formRef}
+        initialValues={initialValues}
+        validationSchema={ValidationSchema}
+        onSubmit={onSubmit}
+        onReset={onReset}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <div className="movie-form__field">
+              <FormInput
+                name="title"
+                type="text"
+                label="Title"
+                placeholder="Title here"
+              ></FormInput>
+            </div>
+            <div className="movie-form__field">
+              <FormInput
+                name="tagline"
+                type="text"
+                label="Tagline"
+                placeholder="Tagline here"
+              ></FormInput>
+            </div>
+            <div className="movie-form__field">
+              <FormInput
+                name="release_date"
+                type="date"
+                label="Release Date"
+                placeholder="Release Date here"
+              ></FormInput>
+            </div>
+            <div className="movie-form__field">
+              <FormInput
+                name="poster_path"
+                type="text"
+                label="Poster URL"
+                placeholder="Poster URL here"
+              ></FormInput>
+            </div>
 
-     >
-       {({ errors, touched }) => (
-     <Form>
-        <div className="movie-form__field">
-          <FormInput name="title" type="text" label="Title" placeholder="Title here"></FormInput>
-        </div>
-        <div className="movie-form__field">
-          <FormInput name="tagline" type="text" label="Tagline" placeholder="Tagline here"></FormInput>
-        </div>
-        <div className="movie-form__field">
-          <FormInput name="release_date" type="date" label="Release Date" placeholder="Release Date here"></FormInput>
-        </div>
-        <div className="movie-form__field">
-          <FormInput name="poster_path" type="text" label="Poster URL" placeholder="Poster URL here"></FormInput>
-        </div> 
-        
-        
-          <Field name="genres">
-             {({
-               field, // { name, value, onChange, onBlur }
-               form, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-               meta,
-             }) => ( 
-              <div className={(meta.touched && meta.error)?'movie-form__field has-error':'movie-form__field'}>
-                    <label>genre</label>
-                    <MultiSelect
+            <Field name="genres">
+              {({
+                field, // { name, value, onChange, onBlur }
+                form, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                meta,
+              }) => (
+                <div
+                  className={
+                    meta.touched && meta.error
+                      ? 'movie-form__field has-error'
+                      : 'movie-form__field'
+                  }
+                >
+                  <label>genre</label>
+                  <MultiSelect
                     hasSelectAll={false}
                     disableSearch={true}
                     options={movieOptions}
@@ -133,30 +145,39 @@ const MovieForm: React.FC<any> = props => {
                     onChange={multiSelectChange.bind(null, form, field)}
                     labelledBy={'Select'}
                   />
-              
-                <div className="movie-form__error">{meta.touched && meta.error}</div>
-              
+
+                  <div className="movie-form__error">
+                    {meta.touched && meta.error}
+                  </div>
                 </div>
-             )}
-           </Field>
-      
-     
-        <div className="movie-form__field">
-          <FormInput name="overview" type="text" label="Overview" placeholder="Overview here"></FormInput>
-        </div>
-        <div className="movie-form__field">
-          <FormInput name="runtime" type="text" label="Runtime" placeholder="Runtime here"></FormInput>
-        </div>
-      </Form>
-       )}
-       </Formik>
+              )}
+            </Field>
+
+            <div className="movie-form__field">
+              <FormInput
+                name="overview"
+                type="text"
+                label="Overview"
+                placeholder="Overview here"
+              ></FormInput>
+            </div>
+            <div className="movie-form__field">
+              <FormInput
+                name="runtime"
+                type="text"
+                label="Runtime"
+                placeholder="Runtime here"
+              ></FormInput>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
 
 MovieForm.propTypes = {};
 MovieForm.defaultProps = {
-  onInputValueChange:function(){}
 };
 
 export default MovieForm;

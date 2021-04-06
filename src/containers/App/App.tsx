@@ -5,8 +5,8 @@ import { MODAL, MOVIE_GENRES, SORT_BY } from '../../types';
 import ConfirmModal from '../Modal/Confirm/Confirm';
 import MovieAddModal from '../Modal/MovieAdd/MovieAdd';
 import MovieEditModal from '../Modal/MovieEdit/MovieEdit';
-import { movieDelete } from '../../redux/movie/movie.actions';
 import { connect } from 'react-redux';
+import { movieDelete } from '../../redux/movie/movie.actions';
 let moviesJSON = [];
 
 const App = props => {

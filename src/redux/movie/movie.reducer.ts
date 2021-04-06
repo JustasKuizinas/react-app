@@ -29,36 +29,36 @@ const movieReducer = (state: any = [], action) => {
     case MOVIE_DELETE:
       return __dc(state.filter(movie => movie.id != action.payload));
 
-    case MOVIE_FILTER:
-      let { genre, search } = action.payload;
-      state.forEach(movie => {
-        movie.active = false;
-        if (search) {
-          if (movie.title.toLowerCase().indexOf(search.toLowerCase()) >= 0) {
-            movie.active = true;
-          }
-        } else if (genre) {
-          if (genre == 'All' || movie.genres.includes(genre)) {
-            movie.active = true;
-          }
-        } else {
-          movie.active = true;
-        }
-      });
-      return __dc(state);
+    // case MOVIE_FILTER:
+    //   let { genre, search } = action.payload;
+    //   state.forEach(movie => {
+    //     movie.active = false;
+    //     if (search) {
+    //       if (movie.title.toLowerCase().indexOf(search.toLowerCase()) >= 0) {
+    //         movie.active = true;
+    //       }
+    //     } else if (genre) {
+    //       if (genre == 'All' || movie.genres.includes(genre)) {
+    //         movie.active = true;
+    //       }
+    //     } else {
+    //       movie.active = true;
+    //     }
+    //   });
+    //   return __dc(state);
 
-    case MOVIE_SORT:
-      let sortBy = action.payload;
-      if (sortBy == SORT_BY.DATE) {
-        state.sort((a, b) => {
-          return +new Date(b.release_date) - +new Date(a.release_date);
-        });
-      } else if (sortBy == SORT_BY.TITLE) {
-        state.sort((a, b) => {
-          return b.title > a.title ? -1 : 1;
-        });
-      }
-      return __dc(state);
+    // case MOVIE_SORT:
+    //   let sortBy = action.payload;
+    //   if (sortBy == SORT_BY.DATE) {
+    //     state.sort((a, b) => {
+    //       return +new Date(b.release_date) - +new Date(a.release_date);
+    //     });
+    //   } else if (sortBy == SORT_BY.TITLE) {
+    //     state.sort((a, b) => {
+    //       return b.title > a.title ? -1 : 1;
+    //     });
+    //   }
+    //   return __dc(state);
 
     default:
       return state;

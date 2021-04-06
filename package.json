@@ -51,18 +51,19 @@
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
-    "ts-loader": "^8.0.17",
     "typescript": "^4.1.5",
+    "ts-loader": "^8.0.17",
     "webpack": "^5.23.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
-    "@types/react-redux": "^7.1.16",
     "@types/yup": "^0.29.11",
+    "@types/react-redux": "^7.1.16",
     "@welldone-software/why-did-you-render": "^6.1.1",
     "formik": "^2.2.6",
+    "yup": "^0.32.9",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -72,7 +73,6 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "save-dev": "^0.0.1-security",
-    "yup": "^0.32.9"
+    "save-dev": "^0.0.1-security"
   }
 }

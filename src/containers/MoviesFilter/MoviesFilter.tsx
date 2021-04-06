@@ -1,13 +1,17 @@
 import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import './MoviesFilter.scss';
-import Select from '../Select/Select';
+import Select from '../../components/Select/Select';
 import { MOVIE_GENRES, SORT_BY } from '../../types';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { movieFilter, movieSort } from '../../redux/movie/movie.actions';
+import { RootState } from '../../redux';
+import { setGenre } from '../../redux/genre';
+import { setSort } from '../../redux/sort';
 
 const MoviesFilter: React.FC<any> = props => {
-  const [activeGenre, setActiveGenre] = useState('All');
+  let activeGenre = useSelector((state: RootState) => state.genre);
+  let dispatch = useDispatch();
 
   let buttons = [
     ...Object.values(MOVIE_GENRES).map(genre => ({
@@ -23,12 +27,11 @@ const MoviesFilter: React.FC<any> = props => {
   ];
 
   function selectGenre(genre) {
-    setActiveGenre(genre);
-    props.movieFilterProp(genre);
+    dispatch(setGenre(genre));
   }
 
   function sortBy(e) {
-    props.movieSortProp(e.target.value);
+    dispatch(setSort(e.target.value));
   }
 
   return (
@@ -53,14 +56,4 @@ const MoviesFilter: React.FC<any> = props => {
   );
 };
 
-MoviesFilter.propTypes = {
-};
-
-function mapDispatchProps(dispatch) {
-  return {
-    movieFilterProp: genre => dispatch(movieFilter(genre)),
-    movieSortProp: sortBy => dispatch(movieSort(sortBy)),
-  };
-}
-
-export default connect(null, mapDispatchProps)(MoviesFilter);
+export default MoviesFilter;

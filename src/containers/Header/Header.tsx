@@ -5,10 +5,13 @@ import { VscSearch } from 'react-icons/vsc';
 import Button from '../../components/Button/Button';
 import Search from '../../components/Search/Search';
 import { MODAL } from '../../types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { movieFilter } from '../../redux/movie/movie.actions';
+import { setSearch } from '../../redux/search';
 
 const Header: React.FC<any> = props => {
+  let dispatch = useDispatch();
+
   function closeMovieInfo() {
     props.setActiveMovie(null);
   }
@@ -16,6 +19,11 @@ const Header: React.FC<any> = props => {
   function addMovie() {
     props.openModal(MODAL.MOVIE_ADD);
   }
+
+  function setSerch(value) {
+    dispatch(setSearch(value));
+  }
+
   function renderSearch() {
     return (
       <div className="header__search">
@@ -27,7 +35,7 @@ const Header: React.FC<any> = props => {
           </div>
 
           <h1>Find your movie</h1>
-          <Search onSearch={props.movieFilterProp} />
+          <Search onSearch={setSerch} />
         </div>
       </div>
     );
@@ -71,10 +79,4 @@ Header.propTypes = {
   movie: PropTypes.object,
 };
 
-function mapDispatchProps(dispatch) {
-  return {
-    movieFilterProp: search => dispatch(movieFilter('', search)),
-  };
-}
-
-export default connect(null, mapDispatchProps)(Header);
+export default Header;
