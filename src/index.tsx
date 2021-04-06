@@ -1,5 +1,5 @@
 // import '../whyr'; // <--- first importimport ReactDOM from 'react-dom';
-/// <reference types="@welldone-software/why-did-you-render" />
+/// //<reference types="@welldone-software/why-did-you-render" />
 
 import './style.scss';
 import React from 'react';

@@ -67,7 +67,7 @@ MoviesList.propTypes = {
   moviesReceived: PropTypes.bool,
 };
 
-MoviesList.whyDidYouRender = true;
+// MoviesList.whyDidYouRender = true;
 
 function mapStateProps(state) {
   return {
