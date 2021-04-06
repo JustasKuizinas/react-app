@@ -8,6 +8,7 @@ import { RootState } from '../../redux';
 import { API_URL } from '../../types';
 import { movieAdd, movieInit } from '../../redux/movie/movie.actions';
 import MovieService from '../../services/movie/movie.service';
+import { __dc } from '../../helpers';
 
 const MoviesList: React.FC<any> = props => {
   const [moviesFound, setMoviesFound] = useState(true);
@@ -32,7 +33,7 @@ const MoviesList: React.FC<any> = props => {
                 <MovieCard
                   openModal={props.openModal}
                   setActiveMovie={props.setActiveMovie}
-                  movie={movie}
+                  movie={__dc(movie)}
                   key={movie.id}
                 />
               );

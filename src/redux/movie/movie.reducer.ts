@@ -22,8 +22,8 @@ const movieReducer = (state: any = [], action) => {
       return [...action.payload];
 
     case MOVIE_EDIT:
-      let movie = state.find(movie => movie.id === action.payload.id);
-      movie = action.payload;
+      let i = state.findIndex(movie => movie.id == action.payload.id);
+      state[i] = {...state[i],...action.payload};
       return __dc(state);
 
     case MOVIE_DELETE:

@@ -21,11 +21,11 @@ const Modal: React.FC<any> = props => {
             )}
             <div className="modal__btns">
               {props.cancelText && (
-                <Button onClick={props.onModalCancel} style="-outline">
+                <Button type="button"  onClick={props.onModalCancel} style="-outline">
                   {props.cancelText}
                 </Button>
               )}
-              <Button onClick={props.onModalSubmit} style="-trenary">
+              <Button  type="button"  onClick={props.onModalSubmit} style="-trenary">
                 {props.submitText}
               </Button>
             </div>
