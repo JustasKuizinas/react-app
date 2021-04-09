@@ -27,7 +27,6 @@ export default class MovieService {
 
   static update(movie) {
     movie = __dc(movie);
-    delete movie.active;
     return fetch(API_URL + 'movies', {
       headers,
       method: 'PUT',
