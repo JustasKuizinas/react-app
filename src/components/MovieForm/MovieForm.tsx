@@ -36,8 +36,7 @@ const MovieForm: React.FC<any> = props => {
     runtime: Yup.number().required('Required'),
   });
 
-  let initialValues = {
-    id: props.movie?.id ? props.movie.id : '',
+  let initialValues: any = {
     title: props.movie?.title ? props.movie.title : '',
     tagline: props.movie?.tagline ? props.movie.tagline : '',
     release_date: props.movie?.release_date ? props.movie.release_date : '',
@@ -46,6 +45,9 @@ const MovieForm: React.FC<any> = props => {
     runtime: props.movie?.runtime ? props.movie.runtime : '',
     genres: props.movie?.genres ? props.movie.genres : [],
   };
+  if (props.movie?.id) {
+    initialValues.id = props.movie.id;
+  }
 
   useEffect(() => {
     let movie = props.movie;
@@ -164,7 +166,7 @@ const MovieForm: React.FC<any> = props => {
             <div className="movie-form__field">
               <FormInput
                 name="runtime"
-                type="text"
+                type="number"
                 label="Runtime"
                 placeholder="Runtime here"
               ></FormInput>
@@ -177,7 +179,6 @@ const MovieForm: React.FC<any> = props => {
 };
 
 MovieForm.propTypes = {};
-MovieForm.defaultProps = {
-};
+MovieForm.defaultProps = {};
 
 export default MovieForm;

@@ -44,7 +44,6 @@ const MovieAddModal: React.FC<any> = props => {
 function mapDispatchProps(dispatch) {
   return {
     movieAddProp: movie => {
-      movie.runtime = +movie.runtime;
       dispatch(movieAdd(movie));
     },
   };
