@@ -10,6 +10,7 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
+    historyApiFallback: true,
     contentBase: './build',
   },
   devtool: 'inline-source-map',
@@ -20,12 +21,20 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+        },
+      },  
+      {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
             loader: 'file-loader',
-            options: {},
-          },
+            options: {
+             
+            },
+          }, 
         ],
       },
       {

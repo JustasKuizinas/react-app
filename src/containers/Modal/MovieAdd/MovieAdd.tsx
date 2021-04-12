@@ -7,36 +7,37 @@ import { connect } from 'react-redux';
 import { movieAdd } from '../../../redux/movie/movie.actions';
 
 const MovieAddModal: React.FC<any> = props => {
-  const formRef:any = useRef();
+  const formRef: any = useRef();
 
   function addMovie() {
+    console.log(formRef.current);
     if (formRef.current) {
-     formRef.current.handleSubmit();
+      formRef.current.handleSubmit();
+      console.log(formRef.current);
     }
-    if(formRef.current && formRef.current.isValid){
+    if (formRef.current && formRef.current.dirty && formRef.current.isValid) {
       let movie = formRef.current.values;
       props.movieAddProp(movie);
       props.onModalClose();
     }
-   
   }
 
-  function resetForm(){
+  function resetForm() {
     formRef.current.handleReset();
   }
-  
+
   function onModalCancel() {}
 
-  return ( 
+  return (
     <Modal
       title="Add Movie"
       submitText="Submit"
       cancelText="Reset"
       onModalClose={props.onModalClose}
       onModalCancel={resetForm}
-      onModalSubmit={addMovie} 
+      onModalSubmit={addMovie}
     >
-      <MovieForm  formRef={formRef}></MovieForm>
+      <MovieForm formRef={formRef}></MovieForm>
     </Modal>
   );
 };

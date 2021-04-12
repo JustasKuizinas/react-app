@@ -7,13 +7,15 @@ import MovieAddModal from '../Modal/MovieAdd/MovieAdd';
 import MovieEditModal from '../Modal/MovieEdit/MovieEdit';
 import { connect } from 'react-redux';
 import { movieDelete } from '../../redux/movie/movie.actions';
+import { Switch, Route, Router, BrowserRouter } from 'react-router-dom';
+import NotFound from '../../pages/NotFound/NotFound';
+
 let moviesJSON = [];
 
 const App = props => {
   let [modalData, setModalData] = useState<{ [key: string]: any }>({});
   let [activeModalType, setActiveModalType] = useState(null);
   let [activeMovie, setActiveMovie] = useState(null);
-
 
   const openModal = useCallback((activeModalType = null, modalData = {}) => {
     document.querySelector('body').classList.add('modal-open');
@@ -54,12 +56,6 @@ const App = props => {
     return modal;
   }
 
-
-  const selectActiveMovie = useCallback(activeMovie => {
-    setActiveMovie(activeMovie);
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <>
       <div className="main-logo">
@@ -71,11 +67,20 @@ const App = props => {
       </div>
 
       <div className="page-wrapper">
-        <Home
-          activeMovie={activeMovie}
-          selectActiveMovie={selectActiveMovie}
-          openModal={openModal}
-        />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <Home openModal={openModal} />
+            </Route>
+            <Route exact path="/film/:filmID">
+              <Home openModal={openModal} />
+            </Route>
+            <Route path="/search/:searchQuery">
+              <Home exact openModal={openModal} />
+            </Route>
+            <Route path="*" component={NotFound}></Route>
+          </Switch>
+        </BrowserRouter>
       </div>
 
       {renderModals()}

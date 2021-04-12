@@ -1,9 +1,19 @@
 import { RootState } from '..';
 import { MOVIE_GENRES, SORT_BY } from '../../types';
 
-export const getFilteredMovies = (genre, search, sort) => (
+export const getMovie = (id: number) => (state: RootState) => {
+  let movie = state.movies.filter(movie => movie.id == id);
+  if (movie.length > 0) return movie[0];
+  return null;
+};
+
+export const getFilteredMovies = () => (
   state: RootState
 ) => {
+  const genre = state.genre;
+  const search= state.search;
+  const sort = state.sort;
+
   let movies = state.movies.filter(movie => {
     if (genre === MOVIE_GENRES.ALL) {
       return true;
@@ -34,6 +44,8 @@ export const getFilteredMovies = (genre, search, sort) => (
       });
     }
   }
+
+  state=null;
 
   return movies;
 };

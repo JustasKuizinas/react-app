@@ -16,6 +16,7 @@ const MovieForm: React.FC<any> = props => {
   let allGenres = [...Object.values(MOVIE_GENRES_FULL)];
   allGenres.shift();
   let movieOptions = [];
+  let initialMovieGenres = [];
 
   movieOptions = allGenres.map(genre => ({
     label: genre,
@@ -45,6 +46,7 @@ const MovieForm: React.FC<any> = props => {
     runtime: props.movie?.runtime ? props.movie.runtime : '',
     genres: props.movie?.genres ? props.movie.genres : [],
   };
+
   if (props.movie?.id) {
     initialValues.id = props.movie.id;
   }
@@ -52,8 +54,7 @@ const MovieForm: React.FC<any> = props => {
   useEffect(() => {
     let movie = props.movie;
     if (movie) {
-      let movieGenres = [];
-      movieGenres = props.movie.genres
+      initialMovieGenres = props.movie.genres
         .filter(genre => {
           if (allGenres.includes(genre)) return true;
         })
@@ -61,9 +62,7 @@ const MovieForm: React.FC<any> = props => {
           label: genre,
           value: genre,
         }));
-      setGenres(movieGenres);
-
-      console.log(movie);
+      setGenres(initialMovieGenres);
     }
   }, []);
 
@@ -77,7 +76,7 @@ const MovieForm: React.FC<any> = props => {
   function onSubmit() {}
 
   function onReset() {
-    setGenres([]);
+    setGenres(initialMovieGenres);
   }
 
   return (

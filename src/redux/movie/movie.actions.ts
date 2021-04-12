@@ -11,7 +11,6 @@ import {
 
 export const movieAdd = movie => dispatch => {
   MovieService.add(movie).then(movie => {
-    console.log(movie)
     dispatch({
       type: MOVIE_ADD,
       payload: movie,

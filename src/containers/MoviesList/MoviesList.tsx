@@ -10,21 +10,31 @@ import MovieService from '../../services/movie/movie.service';
 import { __dc } from '../../helpers';
 import { getFilteredMovies } from '../../redux/movie/movie.selectors';
 import { movieInit } from '../../redux/movie/movie.actions';
+import { useHistory } from 'react-router-dom';
 
 const MoviesList: React.FC<any> = props => {
-  const [moviesFound, setMoviesFound] = useState(true);
+  const [moviesFound, setMoviesFound] = useState(null);
+  const [moviesInitialized, setMoviesInitialized] = useState(null);
   const dispatch = useDispatch();
+  const history = useHistory();
+  let movies = useSelector(getFilteredMovies());
+
+  useEffect(() => {
+    if (moviesInitialized) {
+      if (movies.length > 0) {
+        setMoviesFound(true);
+      } else {
+        setMoviesFound(false);
+      }
+    }
+  }, [movies]);
 
   useEffect(() => {
     MovieService.getAll(1000).then(movies => {
+      setMoviesInitialized(true);
       dispatch(movieInit(movies));
     });
   }, []);
-
-  let genre = useSelector((state: RootState) => state.genre);
-  let search = useSelector((state: RootState) => state.search);
-  let sort = useSelector((state: RootState) => state.sort);
-  let movies = useSelector(getFilteredMovies(genre, search, sort));
 
   function renderMovieList() {
     return (
@@ -36,8 +46,7 @@ const MoviesList: React.FC<any> = props => {
           {movies.map(movie => (
             <MovieCard
               openModal={props.openModal}
-              setActiveMovie={props.setActiveMovie}
-              movie={__dc(movie)}
+              movie={movie}
               key={movie.id}
             />
           ))}
@@ -65,7 +74,6 @@ const MoviesList: React.FC<any> = props => {
 };
 
 MoviesList.propTypes = {
-  setActiveMovie: PropTypes.func,
   movies: PropTypes.array,
   moviesReceived: PropTypes.bool,
 };

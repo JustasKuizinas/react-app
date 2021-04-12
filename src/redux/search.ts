@@ -10,7 +10,7 @@ const searchReducer = (state: string = '', action) => {
     case SET_SEARCH:
       return action.payload;
     default:
-      return state;
+      return state; 
   }
 };
 

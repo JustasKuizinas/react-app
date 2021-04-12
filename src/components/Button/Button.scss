@@ -1,4 +1,6 @@
 .btn {
+  text-decoration: none;
+  display: inline-block;
   &.-primary {
     height: 60px;
     text-transform: uppercase;
@@ -32,6 +34,7 @@
     color: var(--color-primary);
     border-radius: 3px;
     height: 50px;
+    line-height: 50px;
     padding: 0 20px;
     font-size: 1.8rem;
     background-color: transparent;

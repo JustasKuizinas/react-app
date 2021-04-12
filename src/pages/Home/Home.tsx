@@ -14,13 +14,10 @@ const Home: React.FC<any> = props => {
       <ErrorBoundary>
         <Header
           openModal={props.openModal}
-          setActiveMovie={props.selectActiveMovie}
-          activeMovie={props.activeMovie}
         
         />
         <MoviesList
           openModal={props.openModal}
-          setActiveMovie={props.selectActiveMovie}
         />
       </ErrorBoundary>
       <Footer />

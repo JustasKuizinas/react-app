@@ -8,25 +8,23 @@ import { movieEdit } from '../../../redux/movie/movie.actions';
 
 const MovieEditModal: React.FC<any> = props => {
   let movie = props.movie;
-  const formRef:any = useRef();
+  const formRef: any = useRef();
 
   function editMovie() {
-      if (formRef.current) {
-       formRef.current.handleSubmit();
-      }
-      if(formRef.current && formRef.current.isValid){
-        let movie = formRef.current.values;
-        console.log(movie)
-        props.movieEditProp(movie);
-        props.onModalClose();
-      }
-  }
- 
+    if (formRef.current) {
+      formRef.current.handleSubmit();
+    }
 
-  function resetForm(){
+    if (formRef.current && formRef.current.dirty && formRef.current.isValid) {
+      let movie = formRef.current.values;
+      props.movieEditProp(movie);
+      props.onModalClose();
+    }
+  }
+
+  function resetForm() {
     formRef.current.handleReset();
   }
-
 
   return (
     <Modal
@@ -37,7 +35,7 @@ const MovieEditModal: React.FC<any> = props => {
       onModalCancel={resetForm}
       onModalSubmit={editMovie}
     >
-      <MovieForm formRef={formRef}  movie={props.movie}></MovieForm>
+      <MovieForm formRef={formRef} movie={props.movie}></MovieForm>
     </Modal>
   );
 };
