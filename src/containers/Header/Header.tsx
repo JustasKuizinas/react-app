@@ -9,7 +9,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { movieFilter } from '../../redux/movie/movie.actions';
 import { setSearch } from '../../redux/search';
 import { useParams } from 'react-router';
-import { getMovie } from '../../redux/movie/movie.selectors';
+import { getFilteredMovies, getMovie } from '../../redux/movie/movie.selectors';
 import { useHistory } from 'react-router-dom';
 
 const Header: React.FC<any> = props => {
@@ -18,17 +18,24 @@ const Header: React.FC<any> = props => {
   const history = useHistory();
   let activeMovie = null;
   activeMovie = useSelector(getMovie(params.filmID));
+  let movies = useSelector(getFilteredMovies());
   let searchQuery = params.searchQuery;
 
   useEffect(() => {
+    console.log(movies, params.filmID, activeMovie);
     if (activeMovie) {
       window.scrollTo(0, 0);
+    } 
+    if (movies.length > 0 && params.filmID && !activeMovie) {
+      history.push('/404');
     }
-  }, [activeMovie]);
+  }, [movies,activeMovie]);
 
   useEffect(() => {
     if (searchQuery) {
       dispatch(setSearch(searchQuery));
+    } else {
+      dispatch(setSearch(''));
     }
   }, [searchQuery]);
 
@@ -42,8 +49,12 @@ const Header: React.FC<any> = props => {
   }
 
   function doSearch(value) {
-    history.push('/search/' + value);
     dispatch(setSearch(value));
+    if (value.trim()) {
+      history.push('/search/' + value);
+    } else {
+      history.push('/');
+    }
   }
 
   function renderSearch() {

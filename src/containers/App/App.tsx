@@ -78,6 +78,7 @@ const App = props => {
             <Route path="/search/:searchQuery">
               <Home exact openModal={openModal} />
             </Route>
+            <Route path="/404" component={NotFound}></Route>
             <Route path="*" component={NotFound}></Route>
           </Switch>
         </BrowserRouter>

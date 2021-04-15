@@ -165,8 +165,8 @@ const MovieForm: React.FC<any> = props => {
             <div className="movie-form__field">
               <FormInput
                 name="runtime"
-                type="number"
                 label="Runtime"
+                type="number"
                 placeholder="Runtime here"
               ></FormInput>
             </div>
