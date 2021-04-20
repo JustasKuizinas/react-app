@@ -3,11 +3,14 @@
     "outDir": "./build/",
     "noImplicitAny": false,
     "sourceMap": true,
-    "module": "es6",
+    "module": "esnext",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
-  }
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "esnext"],
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules"]
 }

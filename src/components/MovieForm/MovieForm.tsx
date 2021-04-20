@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from "react";
 import PropTypes from 'prop-types';
 import './MovieForm.scss';
 import Input from '../Input/Input';
@@ -71,6 +71,7 @@ const MovieForm: React.FC<any> = props => {
     form.setFieldValue('genres', genresArr);
     form.setFieldTouched('genres', true);
     setGenres(genres);
+    console.log(selectedGenres)
   }
 
   function onSubmit() {}
