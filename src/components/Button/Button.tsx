@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 import "./Button.scss";
 
@@ -13,6 +13,7 @@ const Button: React.FC<any> = (props) => {
 Button.propTypes = {};
 
 Button.defaultProps = {
+  type:'button',
   style: "",
   onClick: () => {},
 };
